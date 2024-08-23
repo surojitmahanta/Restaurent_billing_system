@@ -1,6 +1,15 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+//COLOR 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define BOLD "\033[1m"
 
 struct items{
     char item[20];
@@ -14,21 +23,22 @@ struct orders{
     int numOfItems;
     struct items itm[50];
 };
-//functions to generate biils
+//functions to generate biils Header
 void generateBillHeader(char name[50],char date[30]){
     printf("\n\n");
-        printf("\t    ADV. Restaurant");
-        printf("\n\t   -----------------");
-        printf("\nDate:%s",date);
-        printf("\nInvoice To: %s",name);
+        printf(BOLD BLUE "\t    SKY. Restaurant" RESET);
+        printf(BOLD MAGENTA "\n\t   -----------------" RESET);
+        printf(BOLD "\nDate:%s",date);
+        printf("\nInvoice To: " GREEN BOLD "%s" RESET, name);
         printf("\n");
-        printf("---------------------------------------\n");
+        printf(BOLD MAGENTA "---------------------------------------\n" RESET);
         printf("Items\t\t");
         printf("Qty\t\t");
         printf("Total\t\t");
-        printf("\n---------------------------------------");
+        printf(BOLD MAGENTA "\n---------------------------------------");
         printf("\n\n");
 }
+//Bill Body
 void generateBillBody(char item[30],int qty, float price){
     printf("%s\t\t",item); 
         printf("%d\t\t",qty); 
@@ -37,22 +47,23 @@ void generateBillBody(char item[30],int qty, float price){
 }
 
 
-
+//Bill Footer
 void generateBillFooter(float total){
     printf("\n");
     float dis = 0.1*total;
     float netTotal=total-dis;
     float cgst=0.09*netTotal,grandTotal=netTotal + 2*cgst;//netTotal + cgst + sgst
-    printf("---------------------------------------\n");
-    printf("Sub Total\t\t\t%.2f",total);
-    printf("\nDiscount @10%s\t\t\t%.2f","%",dis);
-    printf("\n\t\t\t\t-------");
-    printf("\nNet Total\t\t\t%.2f",netTotal);
-    printf("\nCGST @9%s\t\t\t%.2f","%",cgst);
-    printf("\nSGST @9%s\t\t\t%.2f","%",cgst);
-    printf("\n---------------------------------------");
-    printf("\nGrand Total\t\t\t%.2f",grandTotal);
-    printf("\n---------------------------------------\n");
+    
+    printf(BOLD MAGENTA"---------------------------------------\n" RESET);
+    printf(BOLD GREEN "Sub Total\t\t\t%.2f" RESET "\n", total);
+    printf(BLUE "Discount @10%%\t\t\t%.2f\n" RESET ,dis);
+    printf(BOLD MAGENTA "\t\t\t\t-------\n" RESET);
+    printf(GREEN "Net Total\t\t\t%.2f\n" RESET, netTotal);
+    printf(YELLOW "CGST @9%%s\t\t\t%.2f\n"RESET, cgst);
+    printf(YELLOW "SGST @9%%s\t\t\t%.2f\n"RESET, cgst);
+    printf(BOLD MAGENTA "\n---------------------------------------" RESET);
+    printf(GREEN "\nGrand Total\t\t\t%.2f\n"RESET, grandTotal);
+    printf(BOLD MAGENTA "\n---------------------------------------\n" RESET);
 }
 int main(){
     
@@ -67,12 +78,12 @@ int main(){
     system("clear");
     float total = 0;
     int invoiceFound = 0;
-    printf("\t============ADV. RESTAURANT============");
+    printf(CYAN "\t============SKY. RESTAURANT============" RESET);
     printf("\n\nPlease select your prefered operation");
-    printf("\n\n1.Generate Invoice");
-    printf("\n2.Show all Invoices");
-    printf("\n3.Search Invoice");
-    printf("\n4.Exit");
+    printf(YELLOW "\n\n1.Generate Invoice" RESET );
+    printf(GREEN "\n2.Show all Invoices" RESET);
+    printf(MAGENTA "\n3.Search Invoice" RESET);
+    printf(RED "\n4.Exit" RESET);
 
     printf("\n\nYour choice:\t");
     scanf("%d",&opt);
@@ -164,7 +175,7 @@ int main(){
         break;
 
     case 4:
-    printf("\n\t\t Bye Bye :)\n\n");
+    printf("\n\t\t Thank YOu Visit Again :)\n\n");
     exit(0);
     break;
 
